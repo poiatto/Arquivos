@@ -3,46 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Line Chart Example</title>
+  <title>Radial Bar Chart</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div style="width: 280px; height: 170px;">
-    <canvas id="myChart" width="280" height="170"></canvas>
+  <div style="width: 400px; height: 400px;">
+    <canvas id="myRadialChart"></canvas>
   </div>
 
   <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'line',
+    var ctx = document.getElementById('myRadialChart').getContext('2d');
+    var myRadialChart = new Chart(ctx, {
+      type: 'doughnut',
       data: {
-        labels: ['Page A', 'Page B', 'Page C', 'Page D', 'Page E', 'Page F', 'Page G'],
+        labels: ['18-24', '25-29', '30-34', '35-39', '40-49'],
         datasets: [{
-          label: 'PV',
-          data: [2400, 1398, 9800, 3908, 4800, 3800, 4300],
-          borderColor: '#8884d8',
-          fill: false,
-          yAxisID: 'y',
-        }, {
-          label: 'UV',
-          data: [4000, 3000, 2000, 2780, 1890, 2390, 3490],
-          borderColor: '#82ca9d',
-          fill: false,
-          yAxisID: 'y',
+          label: 'Age Range',
+          data: [31.47, 26.69, 15.69, 8.22, 8.63],
+          backgroundColor: [
+            '#8884d8',
+            '#83a6ed',
+            '#8dd1e1',
+            '#82ca9d',
+            '#a4de6c'
+          ],
+          borderWidth: 1
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1000,
-            },
-          },
-          x: {
-            ticks: {
-              autoSkip: false,
-            }
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
           }
         }
       }
