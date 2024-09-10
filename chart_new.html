@@ -7,8 +7,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div style="width: 500px; height: 300px;">
-    <canvas id="myChart" width="500" height="300"></canvas>
+  <div style="width: 280px; height: 170px;">
+    <canvas id="myChart" width="280" height="170"></canvas>
   </div>
 
   <script>
@@ -21,36 +21,24 @@
           label: 'PV',
           data: [2400, 1398, 9800, 3908, 4800, 3800, 4300],
           borderColor: '#8884d8',
-          yAxisID: 'left',
           fill: false,
         }, {
           label: 'UV',
           data: [4000, 3000, 2000, 2780, 1890, 2390, 3490],
           borderColor: '#82ca9d',
-          yAxisID: 'right',
           fill: false,
         }]
       },
       options: {
         scales: {
-          yAxes: [{
-            id: 'left',
-            position: 'left',
-            ticks: {
-              beginAtZero: true
-            }
-          }, {
-            id: 'right',
-            position: 'right',
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          xAxes: [{
+          y: {
+            beginAtZero: true
+          },
+          x: {
             ticks: {
               autoSkip: false
             }
-          }]
+          }
         }
       }
     });
