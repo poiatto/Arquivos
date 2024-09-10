@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radial Bar Chart</title>
+  <title>Radial Bar Chart Example</title>
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </head>
 <body>
@@ -17,21 +17,22 @@
     option = {
       angleAxis: {
         type: 'category',
-        data: ['18-24', '25-29', '30-34', '35-39', '40-49'],
+        data: ['18-24', '25-29', '30-34', '35-39', '40-49', '50+', 'unknown'],
         z: 10
       },
       radiusAxis: {
+        max: 35,  // Definir o valor máximo com base nos dados
       },
       polar: {
       },
       series: [{
         type: 'bar',
-        data: [31.47, 26.69, 15.69, 8.22, 8.63],
+        data: [31.47, 26.69, 15.69, 8.22, 8.63, 2.63, 6.67],
         coordinateSystem: 'polar',
         name: 'Age Group',
         itemStyle: {
           color: function (params) {
-            var colors = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c'];
+            var colors = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c', '#d0ed57', '#ffc658'];
             return colors[params.dataIndex];
           }
         },
@@ -42,7 +43,9 @@
       }],
       legend: {
         show: true,
-        data: ['18-24', '25-29', '30-34', '35-39', '40-49']
+        data: ['18-24', '25-29', '30-34', '35-39', '40-49', '50+', 'unknown'],
+        orient: 'vertical',
+        left: 'right',
       }
     };
 
