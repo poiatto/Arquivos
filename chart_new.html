@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pie Chart Example</title>
+  <title>Doughnut Chart Example</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div style="width: 800px; height: 400px;">
-    <canvas id="myPieChart1" width="400" height="400"></canvas>
-    <canvas id="myPieChart2" width="400" height="400"></canvas>
+  <div style="width: 800px; height: 400px; display: flex; justify-content: space-around;">
+    <canvas id="myDoughnutChart1" width="300" height="300"></canvas>
+    <canvas id="myDoughnutChart2" width="300" height="300"></canvas>
   </div>
 
   <script>
@@ -23,13 +23,16 @@
       }]
     };
 
-    // Pie chart 1
-    const ctx1 = document.getElementById('myPieChart1').getContext('2d');
-    const myPieChart1 = new Chart(ctx1, {
-      type: 'pie',
+    // Doughnut chart 1
+    const ctx1 = document.getElementById('myDoughnutChart1').getContext('2d');
+    const myDoughnutChart1 = new Chart(ctx1, {
+      type: 'doughnut',
       data: data,
       options: {
         responsive: true,
+        cutout: '50%',  // Criar o anel
+        rotation: Math.PI / 2, // Ajuste para iniciar em cima
+        circumference: Math.PI * 1.5, // Cobrir 75% do gráfico
         plugins: {
           legend: {
             position: 'top',
@@ -38,19 +41,21 @@
       }
     });
 
-    // Pie chart 2 (with different position and angle)
-    const ctx2 = document.getElementById('myPieChart2').getContext('2d');
-    const myPieChart2 = new Chart(ctx2, {
-      type: 'pie',
+    // Doughnut chart 2 (rotacionado e com preenchimento parcial)
+    const ctx2 = document.getElementById('myDoughnutChart2').getContext('2d');
+    const myDoughnutChart2 = new Chart(ctx2, {
+      type: 'doughnut',
       data: data,
       options: {
         responsive: true,
+        cutout: '50%',  // Criar o anel
+        rotation: -Math.PI / 2, // Rotacionar o segundo gráfico
+        circumference: Math.PI, // Cobrir 50% do gráfico
         plugins: {
           legend: {
             position: 'top',
           },
-        },
-        rotation: 180, // Adjust start angle for the second pie chart
+        }
       }
     });
   </script>
