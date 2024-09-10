@@ -1,63 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doughnut Chart Example</title>
+  <title>Radial Bar Chart</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </head>
 <body>
-  <div style="width: 800px; height: 400px; display: flex; justify-content: space-around;">
-    <canvas id="myDoughnutChart1" width="300" height="300"></canvas>
-    <canvas id="myDoughnutChart2" width="300" height="300"></canvas>
+  <div style="width: 400px; height: 400px;">
+    <canvas id="myRadialChart"></canvas>
   </div>
+  <div id="radialBarChart" style="width: 600px; height: 400px;"></div>
 
   <script>
-    const data = {
-      labels: ['Group A', 'Group B', 'Group C', 'Group D'],
-      datasets: [{
-        label: 'Dataset 1',
-        data: [400, 300, 300, 200],
-        backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-        hoverOffset: 4
-      }]
+    var ctx = document.getElementById('myRadialChart').getContext('2d');
+    var myRadialChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['18-24', '25-29', '30-34', '35-39', '40-49'],
+        datasets: [{
+          label: 'Age Range',
+          data: [31.47, 26.69, 15.69, 8.22, 8.63],
+          backgroundColor: [
+            '#8884d8',
+            '#83a6ed',
+            '#8dd1e1',
+            '#82ca9d',
+            '#a4de6c'
+          ],
+          borderWidth: 1
+        }]
+    var chartDom = document.getElementById('radialBarChart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+      angleAxis: {
+        type: 'category',
+        data: ['18-24', '25-29', '30-34', '35-39', '40-49'],
+        z: 10
+      },
+      radiusAxis: {
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+      polar: {
+      },
+      series: [{
+        type: 'bar',
+        data: [31.47, 26.69, 15.69, 8.22, 8.63],
+        coordinateSystem: 'polar',
+        name: 'Age Group',
+        itemStyle: {
+          color: function (params) {
+            var colors = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c'];
+            return colors[params.dataIndex];
+          }
+        },
+        label: {
+          show: true,
+          position: 'inside'
+        }
+      }],
+      legend: {
+        show: true,
+        data: ['18-24', '25-29', '30-34', '35-39', '40-49']
+      }
+    });
     };
 
-    // Doughnut chart 1
-    const ctx1 = document.getElementById('myDoughnutChart1').getContext('2d');
-    const myDoughnutChart1 = new Chart(ctx1, {
-      type: 'doughnut',
-      data: data,
-      options: {
-        responsive: true,
-        cutout: '50%',  // Criar o anel
-        rotation: Math.PI, // Ajuste para iniciar na parte superior
-        circumference: Math.PI * 2, // Cobrir 100% do gráfico
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-        }
-      }
-    });
-
-    // Doughnut chart 2 (rotacionado e com preenchimento parcial)
-    const ctx2 = document.getElementById('myDoughnutChart2').getContext('2d');
-    const myDoughnutChart2 = new Chart(ctx2, {
-      type: 'doughnut',
-      data: data,
-      options: {
-        responsive: true,
-        cutout: '50%',  // Criar o anel
-        rotation: Math.PI, // Rotacionar para iniciar do lado esquerdo
-        circumference: Math.PI, // Cobrir 50% do gráfico
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-        }
-      }
-    });
+    option && myChart.setOption(option);
   </script>
 </body>
 </html>
