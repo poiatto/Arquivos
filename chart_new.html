@@ -3,53 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radial Bar Chart Example</title>
-  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <title>Pie Chart Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div id="radialBarChart" style="width: 600px; height: 400px;"></div>
+  <div style="width: 800px; height: 400px;">
+    <canvas id="myPieChart1" width="400" height="400"></canvas>
+    <canvas id="myPieChart2" width="400" height="400"></canvas>
+  </div>
 
   <script>
-    var chartDom = document.getElementById('radialBarChart');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
-      angleAxis: {
-        type: 'category',
-        data: ['18-24', '25-29', '30-34', '35-39', '40-49', '50+', 'unknown'],
-        z: 10
-      },
-      radiusAxis: {
-        max: 35,  // Definir o valor máximo com base nos dados
-      },
-      polar: {
-      },
-      series: [{
-        type: 'bar',
-        data: [31.47, 26.69, 15.69, 8.22, 8.63, 2.63, 6.67],
-        coordinateSystem: 'polar',
-        name: 'Age Group',
-        itemStyle: {
-          color: function (params) {
-            var colors = ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c', '#d0ed57', '#ffc658'];
-            return colors[params.dataIndex];
-          }
-        },
-        label: {
-          show: true,
-          position: 'inside'
-        }
-      }],
-      legend: {
-        show: true,
-        data: ['18-24', '25-29', '30-34', '35-39', '40-49', '50+', 'unknown'],
-        orient: 'vertical',
-        left: 'right',
-      }
+    const data = {
+      labels: ['Group A', 'Group B', 'Group C', 'Group D'],
+      datasets: [{
+        label: 'Dataset 1',
+        data: [400, 300, 300, 200],
+        backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
+        hoverOffset: 4
+      }]
     };
 
-    option && myChart.setOption(option);
+    // Pie chart 1
+    const ctx1 = document.getElementById('myPieChart1').getContext('2d');
+    const myPieChart1 = new Chart(ctx1, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+        }
+      }
+    });
+
+    // Pie chart 2 (with different position and angle)
+    const ctx2 = document.getElementById('myPieChart2').getContext('2d');
+    const myPieChart2 = new Chart(ctx2, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+        },
+        rotation: 180, // Adjust start angle for the second pie chart
+      }
+    });
   </script>
 </body>
 </html>
